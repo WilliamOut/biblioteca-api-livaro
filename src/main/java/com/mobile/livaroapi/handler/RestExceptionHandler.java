@@ -14,6 +14,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public Map<String, String> handleGenericException(Exception ex) {
+
+        Map<String, String> response = new HashMap<>();
+        response.put("error", "Erro Interno do Servidor.");
+        response.put("message", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+
+        response.put("dev_detail", ex.getMessage());
+
+        return response;
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, Object> handleValidationExceptions(MethodArgumentNotValidException e) {

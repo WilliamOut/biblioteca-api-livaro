@@ -2,6 +2,7 @@ package com.mobile.livaroapi.service;
 
 import org.springframework.stereotype.Service;
 
+import com.mobile.livaroapi.dto.EsquecerSenhaDTO;
 import com.mobile.livaroapi.dto.LoginRequestDTO;
 import com.mobile.livaroapi.dto.UsuariosRequestDTO;
 import com.mobile.livaroapi.model.Usuarios;
@@ -59,4 +60,18 @@ public class UsuariosService {
         return usuario;
     }
 
+    public Usuarios atualizarSenhaPorEmail(EsquecerSenhaDTO request) {
+
+        // 1. Busca o usuário pelo e-mail
+        // Nota: findByEmail deve retornar Optional<Usuarios> ou você deve checar null
+        Usuarios usuario = usuariosRepository.findByEmail(request.getEmail());
+
+        if (usuario == null) {
+            throw new IllegalStateException("O link de redefinição expirou ou é inválido.");
+        }
+
+        usuario.setSenha(request.getNovaSenha());
+
+        return usuariosRepository.save(usuario);
+    }
 }
