@@ -1,10 +1,13 @@
 package com.mobile.livaroapi.service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.mobile.livaroapi.dto.EmprestimoRequestDTO;
+import com.mobile.livaroapi.dto.LivroReservadoResponseDTO;
 import com.mobile.livaroapi.model.Emprestimo;
 import com.mobile.livaroapi.model.Livro;
 import com.mobile.livaroapi.model.Usuarios;
@@ -12,7 +15,7 @@ import com.mobile.livaroapi.repository.EmprestimoRepository;
 import com.mobile.livaroapi.repository.LivroRepository;
 import com.mobile.livaroapi.repository.UsuariosRepository;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmprestimoService {
@@ -54,6 +57,14 @@ public class EmprestimoService {
         novoEmprestimo.setStsentregue(false);
 
         return emprestimoRepository.save(novoEmprestimo);
+    }
+
+    @Transactional(readOnly = true)
+    public List<LivroReservadoResponseDTO> listarLivrosReservados(Long idUsuario) {
+        List<Emprestimo> emprestimosAtivos = emprestimoRepository.findByStsentregueFalseAndUsuario_Id(idUsuario);
+        return emprestimosAtivos.stream()
+                .map(LivroReservadoResponseDTO::new)
+                .collect(Collectors.toList());
     }
 
 }
