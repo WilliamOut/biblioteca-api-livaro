@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "0a62da4e-8656-4967-b8cc-bb784184dffa",
+		"name": "livaro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38359975"
+	},
+	"item": [
+		{
+			"name": "cadastrar-usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"{{$randomFullName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"senha\":\"{{$randomPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logar-usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"Conner87@hotmail.com\",\n    \"senha\":\"Kfv12dD5wQgbmWi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "esquecer-senha",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"Conner87@hotmail.com\",\n    \"novaSenha\": \"827654321\",\n    \"confirmacaoSenha\": \"827654321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/esqueci-senha",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"esqueci-senha"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cadastrar-livro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\":\"{{$randomProduct}}\",\n    \"nomeAutor\":\"{{$randomFirstName}} {{$randomLastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/livros",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"livros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "realizar-emprestimo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idUsuario\": 1, \n  \"nomeLivro\": \"Chicken\",\n  \"nomeAutor\": \"Montana Satterfield\",\n  \"prazoEmDias\": 7\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/emprestimo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"emprestimo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar-livros-reservados",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idUsuario\": , \n  \"nomeLivro\": \"\",\n  \"nomeAutor\": \"\",\n  \"prazoEmDias\":  \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/emprestimo/reservados/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"emprestimo",
+						"reservados",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar-todos-livros",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\":\"{{$randomProduct}}\",\n    \"nomeAutor\":\"{{$randomFirstName}} {{$randomLastName}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/livros/listar-todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"livros",
+						"listar-todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar-livros-recentes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/emprestimo/recentes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"emprestimo",
+						"recentes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ler-livro",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idUsuario\": 1, \n  \"nomeLivro\": \"Chicken\",\n  \"nomeAutor\": \"Montana Satterfield\",\n  \"prazoEmDias\": 7\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/emprestimo/ler-livro/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"emprestimo",
+						"ler-livro",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
