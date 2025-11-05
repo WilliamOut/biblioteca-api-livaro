@@ -2,6 +2,7 @@ package com.mobile.livaroapi.service;
 
 import com.mobile.livaroapi.dto.LivroListagemDTO;
 import com.mobile.livaroapi.dto.LivroReservadoResponseDTO;
+import com.mobile.livaroapi.model.Emprestimo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

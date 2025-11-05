@@ -68,5 +68,23 @@ public class EmprestimoService {
     }
 
     //livros recentes = livros que ja foram devolvidos
+    public List<LivroReservadoResponseDTO> listarLivrosRecentes(Long idUsuario) {
+        List<Emprestimo> livrosRecentes = emprestimoRepository.findByStsentregueTrueAndUsuario_Id(idUsuario);
+        return livrosRecentes.stream()
+                .map(LivroReservadoResponseDTO::new)
+                .collect(Collectors.toList());
+    }
 
+    @Transactional
+    public void lerLivro(Long idLivro) {
+        Emprestimo emprestimo = emprestimoRepository.findById(idLivro)
+                .orElseThrow(() -> new IllegalStateException("Empréstimo não encontrado"));
+
+        if(emprestimo.getStsentregue()) {
+            throw new IllegalStateException("Este livro já foi devolvido");
+        }
+
+        emprestimo.setStsentregue(true);
+        emprestimoRepository.save(emprestimo);
+    }
 }

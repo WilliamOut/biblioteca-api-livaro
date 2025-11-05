@@ -12,4 +12,5 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     // Método que o Spring Data JPA traduz para "SELECT * FROM tb_emprestimo WHERE
     // stsentregue = false"
     List<Emprestimo> findByStsentregueFalseAndUsuario_Id(Long idUsuario);
+    List<Emprestimo> findByStsentregueTrueAndUsuario_Id(Long idUsuario);
 }

@@ -4,12 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mobile.livaroapi.dto.EmprestimoRequestDTO;
 import com.mobile.livaroapi.dto.EmprestimoResponseDTO;
@@ -51,4 +46,24 @@ public class EmprestimoController {
 
         return new ResponseEntity<>(reservados, HttpStatus.OK);
     }
+
+    @Operation(summary = "Listar livros recentes (devolvidos)", description = "Retorna uma lista de todos os livros atualmente devplvidos, com nome e autor.")
+    @GetMapping("/recentes/{idUsuario}")
+    public ResponseEntity<List<LivroReservadoResponseDTO>> listarRecentes(@PathVariable Long idUsuario) {
+        List<LivroReservadoResponseDTO> recentes = emprestimoService.listarLivrosRecentes(idUsuario);
+
+        if (recentes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(recentes, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Devolver livro", description = "Cria um registro de livro devolvido")
+    @PatchMapping("/ler-livro/{idLivro}")
+    public ResponseEntity<Void> lerLivro(@PathVariable Long idLivro) {
+        emprestimoService.lerLivro(idLivro);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
