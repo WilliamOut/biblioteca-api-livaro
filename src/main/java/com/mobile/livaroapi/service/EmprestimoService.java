@@ -67,4 +67,6 @@ public class EmprestimoService {
                 .collect(Collectors.toList());
     }
 
+    //livros recentes = livros que ja foram devolvidos
+
 }
