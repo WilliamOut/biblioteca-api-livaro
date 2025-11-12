@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @NoArgsConstructor
@@ -26,8 +27,4 @@ public class UsuariosRequestDTO {
     @NotEmpty(message = "A senha não pode ser vazia.")
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
     private String senha;
-
-    public interface SizeCheck {
-
-    }
 }
