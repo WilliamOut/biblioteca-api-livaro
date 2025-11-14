@@ -10,10 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LivroListagemDTO {
 
+    private Long id;
     private String nome;
     private String nomeAutor;
 
     public LivroListagemDTO(Livro dto) {
+        this.id = dto.getId();
         this.nome = dto.getNome();
         this.nomeAutor = dto.getAutor().getNome();
     }
