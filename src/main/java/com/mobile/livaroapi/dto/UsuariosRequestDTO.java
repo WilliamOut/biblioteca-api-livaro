@@ -1,5 +1,6 @@
 package com.mobile.livaroapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -23,8 +24,9 @@ public class UsuariosRequestDTO {
     @Size(max = 200, message = "O e-mail não pode exceder 200 caracteres.")
     private String email;
 
-    @NotNull(message = "A senha é obrigatória.")
-    @NotEmpty(message = "A senha não pode ser vazia.")
+
+    @NotBlank(message = "A senha não pode ser vazia.")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
     private String senha;
 }

@@ -40,10 +40,24 @@ public class LivroController {
     public ResponseEntity<List<LivroListagemDTO>> listarTodosOsLivros() {
         List<LivroListagemDTO> listados = livroService.listarTodosOsLivros();
 
-        if(listados.isEmpty()) {
+        if (listados.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(listados,HttpStatus.OK);
+        return new ResponseEntity<>(listados, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Buscar livros por título ou autor", description = "Filtra livros disponíveis com base em um termo de busca no título ou no nome do autor")
+    @GetMapping("filtrar")
+    public ResponseEntity<List<LivroListagemDTO>> listarLivrosPorTituloOuAutor(
+            @Valid @RequestParam(required = false) String nomeLivro, @RequestParam(required = false) String nomeAutor) {
+
+        List<LivroListagemDTO> livrosEncontrados = livroService.listarLivrosPorTituloOuAutor(nomeLivro, nomeAutor);
+
+        if (livrosEncontrados.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(livrosEncontrados, HttpStatus.OK);
     }
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0a62da4e-8656-4967-b8cc-bb784184dffa",
+		"_postman_id": "787d9cb9-07b1-47d6-b6f8-32fdd562faac",
 		"name": "livaro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "38359975"
@@ -253,6 +253,45 @@
 						"emprestimo",
 						"ler-livro",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filtrar-nomelivro-nomeautor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\":\"{{$randomProduct}}\",\n    \"nomeAutor\":\"{{$randomFirstName}} {{$randomLastName}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/livros/filtrar?nomeLivro=Bike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"livros",
+						"filtrar"
+					],
+					"query": [
+						{
+							"key": "nomeLivro",
+							"value": "Bike"
+						},
+						{
+							"key": "nomeAutor",
+							"value": "Kendra Bahringer",
+							"disabled": true
+						}
 					]
 				}
 			},
