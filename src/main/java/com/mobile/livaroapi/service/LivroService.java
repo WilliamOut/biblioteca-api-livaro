@@ -13,6 +13,7 @@ import com.mobile.livaroapi.repository.AutorRepository;
 import com.mobile.livaroapi.repository.LivroRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +49,16 @@ public class LivroService {
     @Transactional(readOnly = true)
     public List<LivroListagemDTO> listarTodosOsLivros() {
         return livroRepository.findAll().stream()
+                .map(LivroListagemDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<LivroListagemDTO> listarLivrosPorTituloOuAutor(String nomeLivro, String nomeAutor) {
+        List<Livro> livrosEncontrados = livroRepository
+                .findByNomeContainingIgnoreCaseOrAutorNomeContainingIgnoreCase(nomeLivro, nomeAutor);
+
+        return livrosEncontrados.stream()
                 .map(LivroListagemDTO::new)
                 .collect(Collectors.toList());
     }

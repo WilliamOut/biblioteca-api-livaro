@@ -11,4 +11,7 @@ import com.mobile.livaroapi.model.Livro;
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long> {
     Optional<Livro> findByNomeAndAutorNome(String nomeLivro, String nomeAutor);
+
+    List<Livro> findByNomeContainingIgnoreCaseOrAutorNomeContainingIgnoreCase(String nomeLivro,
+            String nomeAutor);
 }
