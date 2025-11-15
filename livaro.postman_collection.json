@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nome\": \"{{$randomFullName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"senha\":\"{{$randomPassword}}\"\n}",
+					"raw": "{\n    \"nome\": \"Kelvin\",\n    \"email\": \"will1@gmail.com\",\n    \"senha\":\"12345678\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"Conner87@hotmail.com\",\n    \"senha\":\"Kfv12dD5wQgbmWi\"\n}",
+					"raw": "{\n    \"email\":\"will@gmail.com\",\n    \"senha\":\"12345678\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -102,7 +102,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nome\":\"{{$randomProduct}}\",\n    \"nomeAutor\":\"{{$randomFirstName}} {{$randomLastName}}\"\n}",
+					"raw": "{\n    \"nomeLivro\":\"{{$randomProduct}}\",\n    \"nomeAutor\":\"{{$randomFirstName}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -131,7 +131,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"idUsuario\": 1, \n  \"nomeLivro\": \"Chicken\",\n  \"nomeAutor\": \"Montana Satterfield\",\n  \"prazoEmDias\": 7\n\n}",
+					"raw": "{\n  \"idUsuario\": 2, \n  \"nomeLivro\": \"Chair\",\n  \"nomeAutor\": \"Brando\",\n  \"prazoEmDias\": 3\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -242,7 +242,7 @@
 					"raw": "{\n  \"idUsuario\": 1, \n  \"nomeLivro\": \"Chicken\",\n  \"nomeAutor\": \"Montana Satterfield\",\n  \"prazoEmDias\": 7\n\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/emprestimo/ler-livro/1",
+					"raw": "http://localhost:8080/api/emprestimo/ler-livro/2/usuario/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -252,7 +252,9 @@
 						"api",
 						"emprestimo",
 						"ler-livro",
-						"1"
+						"2",
+						"usuario",
+						"2"
 					]
 				}
 			},
@@ -271,7 +273,7 @@
 					"raw": "{\n    \"nome\":\"{{$randomProduct}}\",\n    \"nomeAutor\":\"{{$randomFirstName}} {{$randomLastName}}\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/livros/filtrar?nomeLivro=Bike",
+					"raw": "http://localhost:8080/api/livros/filtrar?nomeLivro=Chair",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -284,13 +286,13 @@
 					],
 					"query": [
 						{
-							"key": "nomeLivro",
-							"value": "Bike"
-						},
-						{
 							"key": "nomeAutor",
 							"value": "Kendra Bahringer",
 							"disabled": true
+						},
+						{
+							"key": "nomeLivro",
+							"value": "Chair"
 						}
 					]
 				}

@@ -14,5 +14,7 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     // stsentregue = false"
     List<Emprestimo> findByStsentregueFalseAndUsuario_Id(Long idUsuario);
     List<Emprestimo> findByStsentregueTrueAndUsuario_Id(Long idUsuario);
-    Optional<Emprestimo> findByLivro_IdAndStsentregueFalse(Long idLivro);
+    List<Emprestimo> findByLivro_IdAndStsentregueFalse(Long idLivro);
+    Optional<Emprestimo> findByLivro_IdAndUsuario_IdAndStsentregueFalse(Long livroId, Long usuarioId);
 }
+

@@ -48,7 +48,7 @@ public class LivroService {
 
     @Transactional(readOnly = true)
     public List<LivroListagemDTO> listarTodosOsLivros() {
-        return livroRepository.findAllAvailableBooks().stream()
+        return livroRepository.findAll().stream()
                 .map(LivroListagemDTO::new)
                 .collect(Collectors.toList());
     }

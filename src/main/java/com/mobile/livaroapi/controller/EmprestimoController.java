@@ -60,9 +60,9 @@ public class EmprestimoController {
     }
 
     @Operation(summary = "Devolver livro", description = "Cria um registro de livro devolvido")
-    @PatchMapping("/ler-livro/{idLivro}")
-    public ResponseEntity<Void> lerLivro(@PathVariable Long idLivro) {
-        emprestimoService.lerLivro(idLivro);
+    @PatchMapping("/ler-livro/{idLivro}/usuario/{idUsuario}")
+    public ResponseEntity<Void> lerLivro(@PathVariable Long idLivro,@PathVariable Long idUsuario) {
+        emprestimoService.lerLivro(idLivro,idUsuario);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

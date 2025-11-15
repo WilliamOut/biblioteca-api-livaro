@@ -43,18 +43,10 @@ public class EmprestimoService {
                 .orElseThrow(() -> new IllegalStateException("Usuário não encontrado!"));
 
         Long livroId = livro.getId();
-        Optional<Emprestimo> emprestimoAtivo = emprestimoRepository.findByLivro_IdAndStsentregueFalse(livroId);
+        Optional<Emprestimo> emprestimoAtivo = emprestimoRepository.findByLivro_IdAndUsuario_IdAndStsentregueFalse(livroId,usuario.getId());
 
         if(emprestimoAtivo.isPresent()) {
-            Emprestimo ativo = emprestimoAtivo.get();
-
-            if(ativo.getUsuario().getId().equals(usuario.getId())) {
                 throw new IllegalStateException("Você já possui este livro emprestado. Por favor, devolva-o antes de tentar um novo empréstimo");
-            }
-
-            throw new IllegalStateException(
-                    "Livro Indisponível: O livro já está com outro usuário e não pode ser emprestado no momento"
-            );
         }
 
         LocalDate dataEmprestimo = LocalDate.now();
@@ -94,9 +86,9 @@ public class EmprestimoService {
     }
 
     @Transactional
-    public void lerLivro(Long idLivro) {
-        Emprestimo emprestimo = emprestimoRepository.findByLivro_IdAndStsentregueFalse(idLivro)
-                .orElseThrow(() -> new IllegalStateException("Livro não está atualemnte emprestado"));
+    public void lerLivro(Long idLivro,Long idUsuario) {
+        Emprestimo emprestimo = emprestimoRepository.findByLivro_IdAndUsuario_IdAndStsentregueFalse(idLivro, idUsuario)
+                .orElseThrow(() -> new IllegalStateException("O empréstimo para este livro e usuário não está ativo"));
 
 
         emprestimo.setStsentregue(true);
