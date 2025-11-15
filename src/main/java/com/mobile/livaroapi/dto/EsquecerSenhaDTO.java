@@ -9,9 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @PasswordMatches
 public class EsquecerSenhaDTO {
 
@@ -26,4 +23,36 @@ public class EsquecerSenhaDTO {
     @NotBlank(message = "A confirmação da senha é obrigatória.")
     @Size(min = 8, message = "A confirmação de senha deve ter no mínimo 8 caracteres.")
     private String confirmacaoSenha;
+
+    public EsquecerSenhaDTO() {}
+
+    public EsquecerSenhaDTO(String email, String novaSenha, String confirmacaoSenha) {
+        this.email = email;
+        this.novaSenha = novaSenha;
+        this.confirmacaoSenha = confirmacaoSenha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNovaSenha() {
+        return novaSenha;
+    }
+
+    public void setNovaSenha(String novaSenha) {
+        this.novaSenha = novaSenha;
+    }
+
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
+    }
 }

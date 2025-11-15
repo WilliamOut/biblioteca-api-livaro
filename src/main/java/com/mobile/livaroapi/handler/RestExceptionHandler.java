@@ -59,4 +59,23 @@ public class RestExceptionHandler {
         );
         return new ResponseEntity<>(errorResponseDTO,status);
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponseDTO> handleIllegalStateException(IllegalStateException ex, WebRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        String detailMessage = ex.getMessage();
+        String path = request.getDescription(false).replace("uri=", "");
+
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
+                status.value(),
+                "Regra de Negócio Violada",
+                detailMessage,
+                path,
+                null
+        );
+
+        return new ResponseEntity<>(errorResponseDTO, status);
+    }
 }

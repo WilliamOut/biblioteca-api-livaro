@@ -40,7 +40,7 @@ public class LivroService {
                 });
 
         Livro novoLivro = new Livro();
-        novoLivro.setNome(dto.getNome());
+        novoLivro.setNome(dto.getNomeLivro());
         novoLivro.setAutor(autor);
 
         return livroRepository.save(novoLivro);
@@ -48,7 +48,7 @@ public class LivroService {
 
     @Transactional(readOnly = true)
     public List<LivroListagemDTO> listarTodosOsLivros() {
-        return livroRepository.findAll().stream()
+        return livroRepository.findAllAvailableBooks().stream()
                 .map(LivroListagemDTO::new)
                 .collect(Collectors.toList());
     }

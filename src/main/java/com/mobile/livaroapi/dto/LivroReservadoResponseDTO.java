@@ -6,16 +6,41 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class LivroReservadoResponseDTO {
 
-    private String nome;
+    private Long id;
+    private String nomeLivro;
     private String nomeAutor;
 
+    public LivroReservadoResponseDTO() {}
     public LivroReservadoResponseDTO(Emprestimo dto) {
-        this.nome = dto.getLivro().getNome();
+        this.id = dto.getId();
+        this.nomeLivro = dto.getLivro().getNome();
         this.nomeAutor = dto.getLivro().getAutor().getNome();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomeLivro() {
+        return nomeLivro;
+    }
+
+    public void setNomeLivro(String nomeLivro) {
+        this.nomeLivro = nomeLivro;
+    }
+
+    public String getNomeAutor() {
+        return nomeAutor;
+    }
+
+    public void setNomeAutor(String nomeAutor) {
+        this.nomeAutor = nomeAutor;
     }
 }

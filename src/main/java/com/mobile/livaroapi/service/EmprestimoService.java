@@ -2,6 +2,7 @@ package com.mobile.livaroapi.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import com.mobile.livaroapi.repository.LivroRepository;
 import com.mobile.livaroapi.repository.UsuariosRepository;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.swing.text.html.Option;
 
 @Service
 public class EmprestimoService {
@@ -38,6 +41,21 @@ public class EmprestimoService {
 
         Usuarios usuario = usuariosRepository.findById(dto.getIdUsuario())
                 .orElseThrow(() -> new IllegalStateException("Usuário não encontrado!"));
+
+        Long livroId = livro.getId();
+        Optional<Emprestimo> emprestimoAtivo = emprestimoRepository.findByLivro_IdAndStsentregueFalse(livroId);
+
+        if(emprestimoAtivo.isPresent()) {
+            Emprestimo ativo = emprestimoAtivo.get();
+
+            if(ativo.getUsuario().getId().equals(usuario.getId())) {
+                throw new IllegalStateException("Você já possui este livro emprestado. Por favor, devolva-o antes de tentar um novo empréstimo");
+            }
+
+            throw new IllegalStateException(
+                    "Livro Indisponível: O livro já está com outro usuário e não pode ser emprestado no momento"
+            );
+        }
 
         LocalDate dataEmprestimo = LocalDate.now();
         LocalDate dataEntrega = dataEmprestimo.plusDays(dto.getPrazoEmDias());
@@ -77,12 +95,9 @@ public class EmprestimoService {
 
     @Transactional
     public void lerLivro(Long idLivro) {
-        Emprestimo emprestimo = emprestimoRepository.findById(idLivro)
-                .orElseThrow(() -> new IllegalStateException("Empréstimo não encontrado"));
+        Emprestimo emprestimo = emprestimoRepository.findByLivro_IdAndStsentregueFalse(idLivro)
+                .orElseThrow(() -> new IllegalStateException("Livro não está atualemnte emprestado"));
 
-        if(emprestimo.getStsentregue()) {
-            throw new IllegalStateException("Este livro já foi devolvido");
-        }
 
         emprestimo.setStsentregue(true);
         emprestimoRepository.save(emprestimo);

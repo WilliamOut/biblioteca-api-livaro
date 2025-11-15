@@ -1,6 +1,7 @@
 package com.mobile.livaroapi.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,5 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     // stsentregue = false"
     List<Emprestimo> findByStsentregueFalseAndUsuario_Id(Long idUsuario);
     List<Emprestimo> findByStsentregueTrueAndUsuario_Id(Long idUsuario);
+    Optional<Emprestimo> findByLivro_IdAndStsentregueFalse(Long idLivro);
 }

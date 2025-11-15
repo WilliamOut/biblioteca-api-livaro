@@ -17,7 +17,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "tb_livro")
-@Data
 public class Livro {
 
     @Id
@@ -33,4 +32,40 @@ public class Livro {
 
     @OneToMany(mappedBy = "livro", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprestimo> emprestimos = new HashSet<>();
+
+    public Livro() {}
+
+    public Livro(Autor autor, String nome, Long id) {
+        this.autor = autor;
+        this.nome = nome;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public Set<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
 }
