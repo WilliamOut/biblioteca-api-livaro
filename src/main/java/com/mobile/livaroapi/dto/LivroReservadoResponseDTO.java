@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LivroReservadoResponseDTO {
 
-    private String nomeLivro;
+    private String nome;
     private String nomeAutor;
 
     public LivroReservadoResponseDTO(Emprestimo dto) {
-        this.nomeLivro = dto.getLivro().getNome();
+        this.nome = dto.getLivro().getNome();
         this.nomeAutor = dto.getLivro().getAutor().getNome();
     }
 }
