@@ -2,6 +2,8 @@ package com.mobile.livaroapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mobile.livaroapi.dto.EsquecerSenhaDTO;
 import com.mobile.livaroapi.dto.LoginRequestDTO;
 import com.mobile.livaroapi.dto.LoginResponseDTO;
+import com.mobile.livaroapi.dto.UsuarioPerfilDTO;
 import com.mobile.livaroapi.dto.UsuarioResponseDTO;
 import com.mobile.livaroapi.dto.UsuariosRequestDTO;
 import com.mobile.livaroapi.model.Usuarios;
@@ -73,4 +76,16 @@ public class UsuariosController {
         }
     }
 
+    @Operation(summary = "Obter perfil do usuário", description = "Retorna o nome do usuário e a quantidade total de livros que ele já leu (devolveu).")
+    @GetMapping("/perfil/{idUsuario}")
+    public ResponseEntity<UsuarioPerfilDTO> obterPerfilUsuario(@PathVariable Long idUsuario) {
+        try {
+            UsuarioPerfilDTO perfil = usuariosService.obterPerfil(idUsuario);
+            return new ResponseEntity<>(perfil, HttpStatus.OK);
+
+        } catch (IllegalStateException e) {
+            // Trata exceções do Service (Usuário não encontrado)
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

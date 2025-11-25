@@ -4,17 +4,21 @@ import org.springframework.stereotype.Service;
 
 import com.mobile.livaroapi.dto.EsquecerSenhaDTO;
 import com.mobile.livaroapi.dto.LoginRequestDTO;
+import com.mobile.livaroapi.dto.UsuarioPerfilDTO;
 import com.mobile.livaroapi.dto.UsuariosRequestDTO;
 import com.mobile.livaroapi.model.Usuarios;
+import com.mobile.livaroapi.repository.EmprestimoRepository;
 import com.mobile.livaroapi.repository.UsuariosRepository;
 
 @Service
 public class UsuariosService {
 
     private final UsuariosRepository usuariosRepository;
+    private final EmprestimoRepository emprestimoRepository;
 
-    public UsuariosService(UsuariosRepository usuariosRepository) {
+    public UsuariosService(UsuariosRepository usuariosRepository, EmprestimoRepository emprestimoRepository) {
         this.usuariosRepository = usuariosRepository;
+        this.emprestimoRepository = emprestimoRepository;
     }
 
     /**
@@ -73,5 +77,14 @@ public class UsuariosService {
         usuario.setSenha(request.getNovaSenha());
 
         return usuariosRepository.save(usuario);
+    }
+
+    public UsuarioPerfilDTO obterPerfil(Long idUsuario) {
+        Usuarios usuario = usuariosRepository.findById(idUsuario)
+                .orElseThrow(() -> new IllegalStateException("Usuário não encontrado"));
+
+        Long qtdLidos = emprestimoRepository.countByUsuario_IdAndStsentregueTrue(idUsuario);
+
+        return new UsuarioPerfilDTO(usuario.getNome(), qtdLidos);
     }
 }
