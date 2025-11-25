@@ -298,6 +298,28 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "obter-perfil",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/perfil/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"perfil",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
